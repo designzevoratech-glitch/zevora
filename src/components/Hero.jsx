@@ -36,7 +36,7 @@ const Hero = () => {
                         transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
                         className="hero-actions"
                     >
-                        <a href="#contact" className="btn-primary">
+                        <a href="https://calendly.com/design-zevoratech/30min" target='blank' className="btn-primary">
                             Book a call
                             <ArrowRight size={16} />
                         </a>
