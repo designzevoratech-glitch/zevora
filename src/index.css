@@ -86,3 +86,37 @@ button {
   background: #333;
   border-radius: 4px;
 }
+
+.seo-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  padding: 14px 0;
+  margin: 60px 0;
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+
+.marquee-track span {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  padding-right: 60px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}

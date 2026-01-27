@@ -57,14 +57,26 @@
     margin: 0 auto;
 }
 
+/* SEO Heading (small & subtle) */
 .hero-title {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+/* Main premium headline */
+.hero-tagline {
     font-size: 3rem;
     line-height: 1.1;
     font-weight: 500;
     margin-bottom: 24px;
+    color: #FFFFFF;
 }
 
-.hero-title span {
+.hero-tagline .muted {
     color: rgba(255, 255, 255, 0.9);
 }
 
@@ -101,23 +113,6 @@
     background: #f0f0f0;
 }
 
-.btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    background: transparent;
-    color: #fff;
-    border: 1px solid var(--border);
-    padding: 16px 32px;
-    border-radius: 999px;
-    font-weight: 500;
-    font-size: 0.9375rem;
-    transition: background 0.2s ease;
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
 .scroll-indicator {
     position: absolute;
     bottom: 40px;
@@ -129,7 +124,7 @@
 }
 
 @media (min-width: 768px) {
-    .hero-title {
+    .hero-tagline {
         font-size: 4.5rem;
     }
 

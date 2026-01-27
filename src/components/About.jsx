@@ -16,7 +16,7 @@ const About = () => {
                     </p>
                 </div>
                 <div className="about-visual">
-                    <img src={aboutVisual} alt="Digital ecosystem architecture" className="about-image" />
+                    <img src={aboutVisual} alt="Zevora Digital Ecosystem and Business Growth Visualization" className="about-image" />
                 </div>
             </div>
         </section>
