@@ -15,6 +15,16 @@ function App() {
 
       <main>
         <Hero />
+        <section className="seo-marquee">
+          <div className="marquee-track">
+            <span>
+              Zevora is a Web Design & Development Agency • SEO Optimized Websites • Automation & AI Solutions • Digital Growth for Modern Businesses •
+            </span>
+            <span>
+              Zevora is a Web Design & Development Agency • SEO Optimized Websites • Automation & AI Solutions • Digital Growth for Modern Businesses •
+            </span>
+          </div>
+        </section>
         <About />
         <Services />
 
