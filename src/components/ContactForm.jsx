@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
-import { Send, MessageCircle, Mail } from 'lucide-react';
-import './Contact.css';
+import { Send, MessageCircle, Mail, Phone, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const itemVariants = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.9,
+            ease: [0.16, 1, 0.3, 1]
+        }
+    }
+};
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -18,16 +30,12 @@ const ContactForm = () => {
         e.preventDefault();
         setStatus('submitting');
 
-        // 1. WhatsApp Redirection
-        const phone = "919074029255"; // Replace with actual number if provided or use placeholder. User didn't provide number, defaulting to generic or placeholder. Wait, "design.zevoratech" email implies a specific user. I will use a placeholder for phone.
-        // Actually user said "Floating WhatsApp button fixed at bottom-right".
-
-        // Construct message
+        // PRESERVED LOGIC: Construct message for WhatsApp if needed (though UI handles redirect)
+        const phone = "917200296476";
         const text = `Hi ZEVORA, I'm ${formData.name}. ${formData.message} (Email: ${formData.email})`;
         const encodedText = encodeURIComponent(text);
-        const waUrl = `https://wa.me/?text=${encodedText}`; // If no number, it asks to choose contact. Better to have a number.
 
-        // 2. Google Sheet / Email via Apps Script
+        // PRESERVED LOGIC: Google Sheet / Email via Apps Script
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcZ02CGkPR08BrzI1U_fIxNDJrncPdjvi7af6YZqMBRrxWPvjdPCa5MmeyIerJggmq0Q/exec";
 
         try {
@@ -50,95 +58,151 @@ const ContactForm = () => {
     };
 
     return (
-        <section id="contact" className="contact-section section">
-            <div className="container contact-layout">
+        <section id="contact" className="section" style={{ background: '#000' }}>
+            <motion.div
+                className="container"
+                initial="initial"
+                whileInView="whileInView"
+                viewport={{ once: true }}
+                transition={{ staggerChildren: 0.1 }}
+                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '8vw' }}
+            >
                 <div className="contact-info">
-                    <h2>Start a Conversation</h2>
-                    <p>
-                        Ready to automate your systems or build a new digital presence?
-                        Let's discuss how we can help your business grow.
-                    </p>
+                    <motion.span variants={itemVariants} style={{ color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.8rem', fontWeight: 700, display: 'block' }}>Connection</motion.span>
+                    <motion.h2 variants={itemVariants} style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', margin: '2.5rem 0' }}>LET'S START <br /> A SYSTEM.</motion.h2>
+                    <motion.p variants={itemVariants} style={{ marginBottom: '3rem', fontSize: '1.1rem' }}>
+                        Ready to automate your operations or build a next-gen digital presence?
+                        Reach out for a strategic consultation.
+                    </motion.p>
 
-                    <div className="contact-methods">
-                        <div className="contact-method">
-                            <Mail size={20} className="text-secondary" />
-                            <span>design.zevoratech@gmail.com</span>
+                    <motion.div variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div className="flex-center" style={{ justifyContent: 'flex-start', gap: '1.5rem' }}>
+                            <div style={{ padding: '0.8rem', background: 'var(--bg-soft)', borderRadius: '2px', border: '1px solid var(--border)' }}><Mail size={20} color="var(--accent)" /></div>
+                            <div>
+                                <span style={{ display: 'block', fontSize: '0.7rem', opacity: 0.5, textTransform: 'uppercase' }}>Email</span>
+                                <a href="mailto:design.zevoratech@gmail.com" style={{ fontSize: '1.1rem' }}>design.zevoratech@gmail.com</a>
+                            </div>
                         </div>
-                        <div className="contact-method">
-                            <MessageCircle size={20} className="text-secondary" />
-                            <span>WhatsApp Support Available</span>
+                        <div className="flex-center" style={{ justifyContent: 'flex-start', gap: '1.5rem' }}>
+                            <div style={{ padding: '0.8rem', background: 'var(--bg-soft)', borderRadius: '2px', border: '1px solid var(--border)' }}><Phone size={20} color="var(--accent)" /></div>
+                            <div>
+                                <span style={{ display: 'block', fontSize: '0.7rem', opacity: 0.5, textTransform: 'uppercase' }}>Direct</span>
+                                <a href="tel:+917200296476" style={{ fontSize: '1.1rem' }}>+91 72002 96476</a>
+                            </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="contact-form">
-                    <div className="form-group">
-                        <label htmlFor="name" className="form-label">Name</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                            className="form-input"
-                            value={formData.name}
-                            onChange={handleChange}
-                            placeholder="John Doe"
-                        />
-                    </div>
+                <motion.div
+                    variants={itemVariants}
+                    style={{
+                        background: 'rgba(255, 255, 255, 0.01)',
+                        padding: '3rem',
+                        border: '1px solid var(--border)',
+                        position: 'relative'
+                    }}
+                >
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                            <label style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.8 }}>Identity</label>
+                            <input
+                                type="text"
+                                name="name"
+                                required
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Your Name"
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    borderBottom: '1px solid var(--border)',
+                                    padding: '1rem 0',
+                                    color: '#fff',
+                                    fontSize: '1rem',
+                                    outline: 'none'
+                                }}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                            className="form-input"
-                            value={formData.email}
-                            onChange={handleChange}
-                            placeholder="john@company.com"
-                        />
-                    </div>
+                        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                            <label style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.8 }}>Access</label>
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="Email Address"
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    borderBottom: '1px solid var(--border)',
+                                    padding: '1rem 0',
+                                    color: '#fff',
+                                    fontSize: '1rem',
+                                    outline: 'none'
+                                }}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label htmlFor="message" className="form-label">Project Details</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            required
-                            className="form-textarea"
-                            value={formData.message}
-                            onChange={handleChange}
-                            placeholder="Tell us about your project or automation needs..."
-                        />
-                    </div>
+                        <div className="form-group" style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                            <label style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.8 }}>Requirement</label>
+                            <textarea
+                                name="message"
+                                required
+                                value={formData.message}
+                                onChange={handleChange}
+                                placeholder="Describe your digital challenge..."
+                                style={{
+                                    background: 'transparent',
+                                    border: 'none',
+                                    borderBottom: '1px solid var(--border)',
+                                    padding: '1rem 0',
+                                    color: '#fff',
+                                    fontSize: '1rem',
+                                    minHeight: '120px',
+                                    outline: 'none',
+                                    resize: 'none'
+                                }}
+                            />
+                        </div>
 
-                    <button
-                        type="submit"
-                        className="submit-btn"
-                        disabled={status === 'submitting'}
-                    >
-                        {status === 'submitting' ? 'Sending...' : 'Send Message'}
-                    </button>
+                        <button
+                            type="submit"
+                            disabled={status === 'submitting'}
+                            style={{
+                                padding: '1.2rem',
+                                background: 'var(--accent)',
+                                color: '#fff',
+                                border: 'none',
+                                fontWeight: 700,
+                                textTransform: 'uppercase',
+                                letterSpacing: '3px',
+                                cursor: 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '1rem'
+                            }}
+                        >
+                            {status === 'submitting' ? 'Transmitting...' : (
+                                <>Initiate <ArrowUpRight size={18} /></>
+                            )}
+                        </button>
 
-                    {status === 'success' && (
-                        <p className="mt-4 text-green-400 text-sm">
-                            Message sent successfully! We will contact you soon.
-                        </p>
-                    )}
-                </form>
-            </div>
+                        {status === 'success' && (
+                            <motion.p
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                style={{ color: '#4ade80', fontSize: '0.9rem', textAlign: 'center' }}
+                            >
+                                TRANSMISSION SUCCESSFUL. WE WILL REACH OUT SOON.
+                            </motion.p>
+                        )}
+                    </form>
+                </motion.div>
+            </motion.div>
 
-            {/* Floating WhatsApp */}
-            <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="wa-float"
-                aria-label="Chat on WhatsApp"
-            >
-                <MessageCircle size={32} />
-            </a>
         </section>
     );
 };
