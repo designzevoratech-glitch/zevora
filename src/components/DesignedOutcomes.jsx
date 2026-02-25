@@ -47,15 +47,15 @@ export default function DesignedOutcomes() {
                 viewport={{ once: true }}
                 transition={{ staggerChildren: 0.15 }}
             >
-                <div style={{ marginBottom: '10vh' }}>
-                    <motion.span variants={itemVariants} style={{ color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '4px', fontSize: '0.8rem', fontWeight: 800, display: 'block' }}>The Zevora Vision</motion.span>
-                    <motion.h2 variants={itemVariants} style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', marginTop: '1.5rem' }}>Studio <br /> Philosophy</motion.h2>
-                    <motion.p variants={itemVariants} style={{ maxWidth: '600px', fontSize: '1.25rem', marginTop: '2rem', opacity: 0.8, fontWeight: 300 }}>
+                <div className="outcomes-header">
+                    <motion.span variants={itemVariants} className="outcomes-tagline">The Zevora Vision</motion.span>
+                    <motion.h2 variants={itemVariants} className="outcomes-main-title">Studio <br /> Philosophy</motion.h2>
+                    <motion.p variants={itemVariants} className="outcomes-description">
                         We don't just build websites; we engineer digital legacies. Our philosophy is rooted in the intersection of technical precision and cinematic design.
                     </motion.p>
                 </div>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '30vh' }}>
+                <div className="outcomes-list">
                     {outcomes.map((item, i) => (
                         <motion.div
                             key={i}
@@ -70,6 +70,33 @@ export default function DesignedOutcomes() {
 
             <style dangerouslySetInnerHTML={{
                 __html: `
+                .outcomes-header {
+                    margin-bottom: 10vh;
+                }
+                .outcomes-tagline {
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    letter-spacing: 4px;
+                    font-size: 0.8rem;
+                    fontWeight: 800;
+                    display: block;
+                }
+                .outcomes-main-title {
+                    font-size: clamp(2.5rem, 8vw, 6rem);
+                    margin-top: 1.5rem;
+                }
+                .outcomes-description {
+                    max-width: 600px;
+                    font-size: 1.25rem;
+                    margin-top: 2rem;
+                    opacity: 0.8;
+                    font-weight: 300;
+                }
+                .outcomes-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30vh;
+                }
                 .outcome-grid {
                     display: grid;
                     grid-template-columns: repeat(2, 1fr);
@@ -86,12 +113,32 @@ export default function DesignedOutcomes() {
                     padding: 2rem 0;
                 }
                 @media (max-width: 991px) {
+                    .outcomes-header {
+                        margin-bottom: 5vh;
+                    }
+                    .outcomes-main-title {
+                        font-size: 3rem;
+                    }
+                    .outcomes-description {
+                        font-size: 1.1rem;
+                    }
+                    .outcomes-list {
+                        gap: 15vh;
+                    }
                     .outcome-grid {
                         grid-template-columns: 1fr;
                         gap: 4rem;
                     }
                     .outcome-media {
                         height: 50vh;
+                    }
+                }
+                @media (max-width: 480px) {
+                    .outcomes-main-title {
+                        font-size: 2.5rem;
+                    }
+                    .outcomes-list {
+                        gap: 10vh;
                     }
                 }
             `}} />

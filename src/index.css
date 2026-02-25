@@ -232,11 +232,11 @@ ul {
   }
 
   h1 {
-    font-size: clamp(3rem, 15vw, 4.5rem) !important;
+    font-size: clamp(3rem, 15vw, 4.5rem);
   }
 
   h2 {
-    font-size: clamp(2rem, 10vw, 3rem) !important;
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   p {
@@ -244,9 +244,18 @@ ul {
     line-height: 1.5;
   }
 
-  .custom-cursor,
-  .custom-cursor-follower {
+  .custom-cursor {
     display: none;
+  }
+
+  .custom-cursor-follower {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-color: rgba(230, 0, 0, 0.3);
+    background: radial-gradient(circle, rgba(230, 0, 0, 0.1) 0%, transparent 70%);
+    border-width: 1px;
+    mix-blend-mode: normal;
   }
 
   body {

@@ -19,13 +19,12 @@ export default function Navbar() {
     ];
 
     return (
-        <nav style={{
+        <nav className={`navbar-main ${scrolled ? 'navbar-scrolled' : ''}`} style={{
             position: 'fixed',
             top: 0,
             left: 0,
             width: '100%',
             zIndex: 1000,
-            padding: scrolled ? '1.5rem 0' : '3rem 0',
             transition: 'var(--transition-smooth)',
             backgroundColor: scrolled ? 'rgba(0, 0, 0, 0.9)' : 'transparent',
             backdropFilter: scrolled ? 'blur(20px)' : 'none',
@@ -158,7 +157,15 @@ export default function Navbar() {
 
             <style dangerouslySetInnerHTML={{
                 __html: `
+        .navbar-main {
+          padding: 3rem 0;
+        }
+        .navbar-scrolled {
+          padding: 1.5rem 0;
+        }
         @media (max-width: 1024px) {
+          .navbar-main { padding: 1.5rem 0; }
+          .navbar-scrolled { padding: 1rem 0; }
           .desktop-nav { display: none !important; }
           .mobile-only { display: block !important; background: none; border: none; cursor: pointer; }
         }

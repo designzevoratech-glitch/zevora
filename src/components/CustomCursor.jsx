@@ -7,16 +7,21 @@ export default function CustomCursor() {
 
     useEffect(() => {
         const moveCursor = (e) => {
+            const x = e.clientX || (e.touches && e.touches[0].clientX);
+            const y = e.clientY || (e.touches && e.touches[0].clientY);
+
+            if (x === undefined || y === undefined) return;
+
             gsap.to(cursorRef.current, {
-                x: e.clientX,
-                y: e.clientY,
+                x: x,
+                y: y,
                 duration: 0.02,
                 ease: "power2.out"
             });
             gsap.to(followerRef.current, {
-                x: e.clientX - 10,
-                y: e.clientY - 10,
-                duration: 0.15,
+                x: x - 20,
+                y: y - 20,
+                duration: 0.2, // Slightly more lag for touch
                 ease: "power2.out"
             });
         };
@@ -32,18 +37,24 @@ export default function CustomCursor() {
         };
 
         window.addEventListener('mousemove', moveCursor);
+        window.addEventListener('touchmove', moveCursor, { passive: true });
 
         const links = document.querySelectorAll('a, button');
         links.forEach(link => {
             link.addEventListener('mouseenter', handleHover);
             link.addEventListener('mouseleave', handleUnhover);
+            link.addEventListener('touchstart', handleHover);
+            link.addEventListener('touchend', handleUnhover);
         });
 
         return () => {
             window.removeEventListener('mousemove', moveCursor);
+            window.removeEventListener('touchmove', moveCursor);
             links.forEach(link => {
                 link.removeEventListener('mouseenter', handleHover);
                 link.removeEventListener('mouseleave', handleUnhover);
+                link.removeEventListener('touchstart', handleHover);
+                link.removeEventListener('touchend', handleUnhover);
             });
         };
     }, []);

@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import './Hero.css';
 
 const TaglineLine = ({ text, mouseX, mouseY, color }) => {
     return (
@@ -75,9 +76,22 @@ export default function Hero() {
         mouseY.set(e.clientY);
     };
 
+    const handleTouchMove = (e) => {
+        if (e.touches && e.touches[0]) {
+            mouseX.set(e.touches[0].clientX);
+            mouseY.set(e.touches[0].clientY);
+        }
+    };
+
     useEffect(() => {
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        window.addEventListener('touchstart', handleTouchMove);
+        window.addEventListener('touchmove', handleTouchMove);
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('touchstart', handleTouchMove);
+            window.removeEventListener('touchmove', handleTouchMove);
+        };
     }, []);
 
     const containerVariants = {
@@ -115,19 +129,30 @@ export default function Hero() {
             overflow: 'hidden'
         }}>
             {/* Interactive Background Glow */}
-            <motion.div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                x: useTransform(springX, x => x - 600),
-                y: useTransform(springY, y => y - 600),
-                width: '1200px',
-                height: '1200px',
-                background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 60%)',
-                pointerEvents: 'none',
-                zIndex: 0,
-                opacity: 0.6
-            }} />
+            <motion.div
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    x: useTransform(springX, x => x - 600),
+                    y: useTransform(springY, y => y - 600),
+                    width: '1200px',
+                    height: '1200px',
+                    background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 60%)',
+                    pointerEvents: 'none',
+                    zIndex: 0,
+                    opacity: 0.6
+                }}
+                animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.4, 0.7, 0.4]
+                }}
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+            />
 
             {/* Subtle Watermark */}
             <div style={{
@@ -154,29 +179,15 @@ export default function Hero() {
                     initial="initial"
                     animate="animate"
                 >
-                    <motion.div variants={itemVariants} style={{ marginBottom: '3rem' }}>
-                        <span style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 700,
-                            letterSpacing: '0.8em',
-                            textTransform: 'uppercase',
-                            color: 'var(--accent)',
-                            display: 'inline-block'
-                        }}>
+                    <motion.div variants={itemVariants} className="hero-top-tagline-wrapper">
+                        <span className="hero-top-tagline">
                             Global Digital Growth Partner
                         </span>
                     </motion.div>
 
                     <motion.h1
                         variants={itemVariants}
-                        style={{
-                            fontSize: 'clamp(3rem, 12vw, 9rem)',
-                            lineHeight: 1,
-                            letterSpacing: '-0.06em',
-                            textTransform: 'uppercase',
-                            cursor: 'default',
-                            marginBottom: '6rem'
-                        }}
+                        className="hero-main-title"
                     >
                         <TaglineLine text="YOU THINK IT." mouseX={mouseX} mouseY={mouseY} />
                         <TaglineLine text="WE MAKE IT." mouseX={mouseX} mouseY={mouseY} color="var(--accent)" />
@@ -184,19 +195,13 @@ export default function Hero() {
 
                     <motion.div
                         variants={itemVariants}
-                        style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}
+                        className="hero-cta-container"
                     >
                         <motion.a
                             whileHover={{ scale: 1.05, y: -5 }}
                             whileTap={{ scale: 0.95 }}
                             href="#contact"
-                            className="btn-premium"
-                            style={{
-                                borderRadius: '100px',
-                                border: '1px solid var(--accent)',
-                                background: 'var(--accent)',
-                                boxShadow: '0 0 20px var(--accent-glow)'
-                            }}
+                            className="btn-premium hero-btn"
                         >
                             START YOUR SYSTEM.
                         </motion.a>
@@ -204,8 +209,7 @@ export default function Hero() {
                             whileHover={{ scale: 1.05, y: -5, borderColor: '#fff' }}
                             whileTap={{ scale: 0.95 }}
                             href="#vision"
-                            className="btn-outline"
-                            style={{ borderRadius: '100px' }}
+                            className="btn-outline hero-btn"
                         >
                             EXPLORE VISION
                         </motion.a>

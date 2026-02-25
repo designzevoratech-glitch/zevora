@@ -79,25 +79,17 @@ export default function Services() {
                 whileInView="whileInView"
                 viewport={{ once: true, margin: "-10%" }}
             >
-                <div style={{ marginBottom: '10rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }}>
-                    <div style={{ maxWidth: '700px' }}>
+                <div className="services-header">
+                    <div className="services-header-content">
                         <motion.span
                             variants={itemVariants}
-                            style={{
-                                color: 'var(--accent)',
-                                textTransform: 'uppercase',
-                                letterSpacing: '0.4em',
-                                fontSize: '0.75rem',
-                                fontWeight: 800,
-                                display: 'block',
-                                marginBottom: '2rem'
-                            }}
+                            className="services-tagline"
                         >
                             Global Services / Core Pillars
                         </motion.span>
                         <motion.h2
                             variants={itemVariants}
-                            style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', lineHeight: 0.9 }}
+                            className="services-main-title"
                         >
                             Precision Engineering <br />
                             <span style={{ color: 'var(--text-dim)', fontWeight: 300 }}>for Global Scale.</span>
@@ -105,7 +97,7 @@ export default function Services() {
                     </div>
                     <motion.div
                         variants={itemVariants}
-                        style={{ width: '100px', height: '1px', background: 'var(--accent)', opacity: 0.3 }}
+                        className="services-header-line"
                     />
                 </div>
 
@@ -115,22 +107,23 @@ export default function Services() {
                             key={i}
                             variants={itemVariants}
                             className="service-row"
+                            whileHover={{ x: 10 }}
+                            whileTap={{ scale: 0.98 }}
                         >
                             <div className="service-flex">
                                 <span className="service-number">{service.num}</span>
                                 <div className="service-title-wrap">
-                                    <span style={{
-                                        fontSize: '0.7rem',
-                                        color: 'var(--accent)',
-                                        fontWeight: 800,
-                                        letterSpacing: '0.1em',
-                                        marginBottom: '0.5rem',
-                                        display: 'block'
-                                    }}>
+                                    <span className="service-pillar-tag">
                                         {service.pillar}
                                     </span>
                                     <h3 className="service-title">{service.title}</h3>
-                                    <p className="service-desc">{service.desc}</p>
+                                    <motion.p
+                                        className="service-desc"
+                                        initial={{ opacity: 0.6 }}
+                                        whileHover={{ opacity: 1 }}
+                                    >
+                                        {service.desc}
+                                    </motion.p>
                                 </div>
                                 <div className="service-icon-box">
                                     {service.icon}
@@ -144,6 +137,53 @@ export default function Services() {
 
             <style dangerouslySetInnerHTML={{
                 __html: `
+                .services-header {
+                    margin-bottom: 10rem;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+                    flex-wrap: wrap;
+                    gap: 2rem;
+                }
+                .services-header-content {
+                    max-width: 700px;
+                }
+                .services-tagline {
+                    color: var(--accent);
+                    text-transform: uppercase;
+                    letter-spacing: 0.4em;
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    display: block;
+                    margin-bottom: 2rem;
+                }
+                .services-main-title {
+                    font-size: clamp(2.5rem, 6vw, 5rem);
+                    line-height: 0.9;
+                }
+                .services-header-line {
+                    width: 100px;
+                    height: 1px;
+                    background: var(--accent);
+                    opacity: 0.3;
+                }
+
+                @media (max-width: 768px) {
+                    .services-header {
+                        margin-bottom: 4rem;
+                    }
+                    .services-tagline {
+                        letter-spacing: 0.2em;
+                        margin-bottom: 1rem;
+                    }
+                    .services-main-title {
+                        font-size: 2.5rem;
+                    }
+                    .services-header-line {
+                        display: none;
+                    }
+                }
+
                 .services-interactive-grid {
                     border-top: 1px solid var(--border);
                 }
@@ -162,6 +202,14 @@ export default function Services() {
                     gap: 3rem;
                     position: relative;
                     z-index: 2;
+                }
+                .service-pillar-tag {
+                    font-size: 0.7rem;
+                    color: var(--accent);
+                    fontWeight: 800;
+                    letterSpacing: 0.1em;
+                    marginBottom: 0.5rem;
+                    display: block;
                 }
                 .service-number {
                     font-family: var(--font-heading);
