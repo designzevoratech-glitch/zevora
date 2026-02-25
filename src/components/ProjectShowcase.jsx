@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const projects = [
     {
-        title: "Green Falls Garden Designer",
+        title: "Green Falls Garden Designers",
         category: "Landscape Design & Nature UI",
-        img: "/clients/green-falls.png",
+        img: "/clients/green-falls-v2.png",
         desc: "Architecting a high-conversion digital presence for leading landscape designers. We translated natural aesthetics into a fluid, sub-second digital experience.",
         url: "https://www.greenfallsgardendesigner.com/",
         invert: true
@@ -118,7 +118,7 @@ function ProjectItem({ project, index }) {
                 position: 'relative',
                 height: '50vh',
                 overflow: 'hidden',
-                background: project.title.includes("Green Falls") ? "#fff" : "var(--bg-offset)",
+                background: "var(--bg-offset)",
                 border: '1px solid var(--border)',
                 display: 'flex',
                 alignItems: 'center',
@@ -132,7 +132,7 @@ function ProjectItem({ project, index }) {
                         maxWidth: '90%',
                         maxHeight: '80%',
                         objectFit: 'contain',
-                        filter: (project.invert && !project.title.includes("Green Falls")) ? 'invert(1) brightness(2)' : 'none',
+                        filter: project.invert ? 'invert(1) brightness(2)' : 'none',
                         y
                     }}
                 />

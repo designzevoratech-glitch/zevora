@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const clients = [
     {
-        name: "Green Falls Garden Designer",
-        logo: "/clients/green-falls.png",
+        name: "Green Falls Garden Designers",
+        logo: "/clients/green-falls-v2.png",
         url: "https://www.greenfallsgardendesigner.com/",
         invert: false
     },
@@ -64,8 +64,6 @@ export default function ClientMarquee() {
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                background: client.name.includes("Green Falls") ? '#fff' : 'transparent',
-                                padding: client.name.includes("Green Falls") ? '2rem' : '0',
                                 opacity: 0.8,
                                 transition: 'var(--transition-smooth)',
                                 flexShrink: 0

@@ -82,7 +82,7 @@ export default function Navbar() {
                             borderRadius: '100px'
                         }}
                     >
-                        BOOK STRATEGY
+                        Connect with us
                     </a>
                 </div>
 
